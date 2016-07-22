@@ -56,28 +56,31 @@ class CommonUtils {
      * @param sendToRecipientList Default true
      *
      * @see <a href="https://github.com/cfpb/jenkins-automation/blob/gh-pages/docs/examples.md#common-utils" target="_blank">Common utils</a>
+*
+*    static void addExtendedEmail(context, String emails, List<String> triggerList = ["failure", "unstable", "fixed"], sendToDevelopers = false, sendToRequester = true, includeCulprits = false, sendToRecipientList = true) {
+*        context.with {
+*            extendedEmail {
+*                recipientList(emails)
+*                triggers {
+*                    triggerList.each {
+*                        "${it}" {
+*                            sendTo {
+*                                if (sendToDevelopers) developers()
+*                                if (sendToRequester) requester()
+*                                if (includeCulprits) culprits()
+*                                if (sendToRecipientList) recipientList()
+*                            }
+*                        }
+*                    }
+*                }
+*            }
+*
+*        }
+*    }
      */
 
-    static void addExtendedEmail(context, String emails, List<String> triggerList = ["failure", "unstable", "fixed"], sendToDevelopers = false, sendToRequester = true, includeCulprits = false, sendToRecipientList = true) {
-        context.with {
-            extendedEmail {
-                recipientList(emails)
-                triggers {
-                    triggerList.each {
-                        "${it}" {
-                            sendTo {
-                                if (sendToDevelopers) developers()
-                                if (sendToRequester) requester()
-                                if (includeCulprits) culprits()
-                                if (sendToRecipientList) recipientList()
-                            }
-                        }
-                    }
-                }
-            }
 
-        }
-    }
+
 
     /**
      * Utility function to add injectGlobalPasswords
